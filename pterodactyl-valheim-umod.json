@@ -1,0 +1,45 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v1"
+    },
+    "exported_at": "2019-07-01T12:01:31+08:00",
+    "name": "Valheim OpenMod Dedicated Server",
+    "author": "michaelcrow@restoremonarchy.com",
+    "description": "Valheim UMod Dedicated Server.",
+    "image": "michaelcrow\/pterodactyl-valheim-umod:latest",
+    "startup": "umod launch",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"Server started\",\r\n    \"userInteraction\": []\r\n}",
+        "logs": "{\r\n    \"custom\": true,\r\n    \"location\": \"latest.log\"\r\n}",
+        "stop": "RETURN"
+    },
+    "scripts": {
+        "installation": {
+            "script": "apt update\r\napt -y --no-install-recommends install curl libgdiplus lib32gcc1 ca-certificates\r\n\r\ncurl -sSL https://umod.io/umod-develop.sh | bash /dev/stdin\n\rsource ~/.profile\n\rumod install valheim -P\n\rumod new launcher -P",
+            "container": "ubuntu:20.04",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Valheim Auto Update",
+            "description": "Input 1 to enable or 0 to disable",
+            "env_variable": "GAME_AUTOUPDATE",
+            "default_value": "1",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|integer|between:0,1"
+        },
+        {
+            "name": "UMod Auto Update",
+            "description": "Input 1 to enable or 0 to disable",
+            "env_variable": "UMOD_AUTOUPDATE",
+            "default_value": "1",
+            "user_viewable": 1,
+            "user_editable": 1,
+            "rules": "required|integer|between:0,1"
+        }
+    ]
+}
