@@ -7,6 +7,7 @@ RUN apt upgrade -y
 RUN apt install -y curl wget 
 RUN useradd -d /home/container -m container
 
+RUN export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
 RUN curl -sSL https://umod.io/umod-develop.sh | bash /dev/stdin
 RUN source ~/.profile
 
